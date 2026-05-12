@@ -30,3 +30,8 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+tmp/main
+tmp/build-errors.log
+internal/database/migrations/sqlite/tmp/main
+internal/data/connect.db
+myapp

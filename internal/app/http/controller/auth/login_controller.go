@@ -12,7 +12,7 @@ type LoginController struct {
 
 // get
 func (login *LoginController) LoginGet() Result {
-	return View("index", Params{"Title": "Going App", "Message": "Welcome to Going"})
+	return View("auth/login", Params{"Title": "Going App", "Message": "Welcome to Going"})
 
 }
 

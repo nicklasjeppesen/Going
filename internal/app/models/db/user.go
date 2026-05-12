@@ -2,7 +2,6 @@ package db
 
 import (
 	"fmt"
-	. "myapp/internal/app/models/appable"
 	"strconv"
 
 	. "github.com/nicklasjeppesen/going_internal/super/db"
@@ -16,10 +15,6 @@ type User struct {
 	Email               string `json:"email" validate:"required"`
 	Password            string `json:"password" validate:"required" hidden:"true"`
 	SessionToken        string `json:"-" hidden:"true"`
-	Company_id          int64  `json:"Company_id" validate:"required"`
-
-	// Delegatable
-	EntryAble
 }
 
 // very very very important, do not change.
@@ -41,18 +36,8 @@ func (user *User) columns() Columns {
 		"email":        &user.Email,
 		"password":     &user.Password,
 		"sessiontoken": &user.SessionToken,
-		"company_id":   &user.Company_id,
+		//"company_id":   &user.Company_id,
 	}
-}
-
-// ------------- Relationships --------------------- //
-func (user *User) Company() BelongsTo[*Company] {
-	return NewBelongsTo(Company{}.DB(), user)
-}
-
-func (user *User) Chats() BelongsToMany[*Chat] {
-	return NewBelongsToMany(Chat{}.DB().WithMessages(), user).
-		PivotCols("created_at", "updated_at")
 }
 
 // ------------- DB Scopes ------------------------ //

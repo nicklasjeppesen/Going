@@ -1,0 +1,17 @@
+{{ define "content" }}
+<div class="card">
+    <h1>Log ind</h1>
+    <form enctype="multipart/form-data" action="/login" method="POST">
+        <label>Brugernavn</label>
+        <input type="text" name="username" required>
+        
+        <label>Adgangskode</label>
+        <input type="password" name="password" required>
+        
+        <button type="submit">Log ind</button>
+    </form>
+    <div class="nav-links">
+        <a href="/register">Ny her? Opret en konto</a>
+    </div>
+</div>
+{{ end }}

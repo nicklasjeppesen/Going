@@ -2,9 +2,20 @@
 <html>
 <head>
     <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>
-    <h1> {{ .Message }}</h1>
+
+<div class="card">
+    <h1>Velkommen 👋</h1>
+    <p>Dette er en simpel Go-applikation med autentificering.</p>
+    <div class="nav-links">
+        <a href="/login">Log ind</a> | 
+        <a href="/register">Opret konto</a>
+    </div>
+</div>
+
+
 </body>
 </html>

@@ -28,8 +28,8 @@ func (c *SampleController) Get(r Request) Result {
 			Message: "Message from a controller",
 		})
 
-	company := db.Company{}.DB().Pagination(r.R, 3)
-	return Response.PrintJson(company)
+	users := db.User{}.DB().Pagination(r.R, 3)
+	return Response.PrintJson(users)
 }
 
 // @Tags         Sample

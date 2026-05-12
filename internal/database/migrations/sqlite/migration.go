@@ -14,7 +14,7 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Brug: go run add_migration.go <navn>")
+		fmt.Println("Use: go run add_migration.go <command>")
 		return
 	}
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Opret bruger</h1>
+    <form enctype="multipart/form-data" action="/registerPost" method="POST">
+        <label>Name</label>
+        <input type="text" name="name" required>
+        
+        <label>Age</label>
+        <input type="number" name="age" required>
+        
+        <label>Email</label>
+        <input type="email" name="email" required>
+        
+        <label>Adgangskode</label>
+        <input type="password" name="password" required>
+        
+        <input type="hidden"  name="csrf_token" value={{.csrf_token}}>
+
+        <button type="submit">Registrer</button>
+    </form>
+    <div class="nav-links">
+        <a href="/login">Har du allerede en konto? Log ind</a>
+    </div>
+</div>
+
+</body>
+</html>

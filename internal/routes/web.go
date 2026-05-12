@@ -7,6 +7,7 @@ import (
 	. "myapp/internal/app/http/controller/auth"
 
 	web "github.com/nicklasjeppesen/going_internal/super/customweb"
+	"github.com/nicklasjeppesen/going_internal/super/middleware"
 )
 
 /*
@@ -23,25 +24,20 @@ import (
 func Webrouter() *web.MyRouter {
 
 	webrouter := web.NewMyRouter()
-	var loginController = LoginController{}
+
 	var homeController = HomeController{}
+	var registerController = RegisterController{}
+	var loginController = LoginController{}
 
-	webrouter.GET("/home", homeController.Home).Name("home.home")
+	webrouter.GET("/", homeController.Home).Name("home.front")
+	webrouter.GET("/register", registerController.RegisterGet).Name("auth.register")
+	webrouter.POST("/registerPost", registerController.Register).Name("auth.register.post")
+
+	webrouter.POST("/login", loginController.Login)
 	webrouter.GET("/login", loginController.LoginGet).Name("auth.login")
+	webrouter.GET("/logout", loginController.Logout)
 
-	/*
-		var homeController = HomeController{}
-		var registerController = RegisterController{}
-		var loginController = LoginController{}
+	webrouter.GET("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
 
-		webrouter.GET("/register", registerController.RegisterGet).Name("auth.register")
-		webrouter.POST("/register", registerController.Register)
-
-		webrouter.POST("/login", loginController.Login)
-		webrouter.GET("/login", loginController.LoginGet).Name("auth.login")
-		webrouter.GET("/logout", loginController.Logout)
-
-		webrouter.GET("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
-	*/
 	return webrouter
 }

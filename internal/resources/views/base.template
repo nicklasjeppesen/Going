@@ -1,0 +1,20 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    
+    <main>
+        {{ block "content" . }}
+        <!-- Her bliver de andre siders indhold indsat -->
+        {{ end }}
+    </main>
+
+    <footer></footer>
+</body>
+</html>
+{{ end }}
