@@ -35,7 +35,7 @@ func Webrouter() *web.MyRouter {
 
 	webrouter.POST("/login", loginController.Login)
 	webrouter.GET("/login", loginController.LoginGet).Name("auth.login")
-	webrouter.GET("/logout", loginController.Logout)
+	webrouter.POST("/logout", loginController.Logout)
 
 	webrouter.GET("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
 

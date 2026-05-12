@@ -1,11 +1,16 @@
+{{ define "content" }}
+
 <div class="card">
     <div class="success-msg">✓ Du er logget ind!</div>
     <h1>Hej, {{ .Username }}!</h1>
     <p>Dette er et område kun for registrerede brugere.</p>
     <hr>
     <div class="nav-links">
-        <form action="/logout" method="POST" style="display:inline;">
+        <form enctype="multipart/form-data" action="/logout" method="POST" style="display:inline;">
+            <input type="hidden"  name="csrf_token" value="{{.csrf_token}}" >
             <button type="submit" style="background-color: #dc3545;">Log ud</button>
         </form>
     </div>
 </div>
+
+{{ end }}

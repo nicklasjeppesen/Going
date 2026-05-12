@@ -1,9 +1,8 @@
 package auth
 
 import (
-	"fmt"
 	. "myapp/internal/app/http/controller"
-	requests "myapp/internal/app/http/requests"
+	"net/http"
 )
 
 type LoginController struct {
@@ -12,33 +11,32 @@ type LoginController struct {
 
 // get
 func (login *LoginController) LoginGet() Result {
-	return View("auth/login", Params{"Title": "Going App", "Message": "Welcome to Going"})
+	return View(
+		"auth/login",
+		Params{"Title": "Going App", "Message": "Welcome to Going"})
 
 }
 
 // Post
-func (login *LoginController) Login(r RequestBody[requests.UserRequest]) Result {
-	auth := r.Auth()
-	failedAuth := auth.Attempt(map[string]any{
-		"email":    r.Body.Email,
-		"password": r.Body.Password,
-	})
+func (login *LoginController) Login(r Request) {
 
-	if failedAuth {
-		return Fail.StatusUnauthorized("Invalid credentials")
+	auth := r.Auth()
+	if auth.Attempt(map[string]any{
+		"email":    r.R.FormValue("email"),
+		"password": r.R.FormValue("password"),
+	}) {
+		http.Redirect(r.W, r.R, "/protected", 302)
+	} else {
+		Fail.StatusUnauthorized("Invalid credentials")
 	}
 
-	return View("/<TODO>", nil) // have to be the URL.
-
 }
 
-func (login *LoginController) Protected(requst Request) {
-
-	fmt.Println("Passed all middlewares")
-	requst.PrintJson("Welcome to procted area")
+func (login *LoginController) Protected(requst Request) Result {
+	return View("protected", nil) // have to be the URL.
 }
 
-func (loginController *LoginController) Logout(r Request) Result {
+func (loginController *LoginController) Logout(r Request) {
 	r.Auth().Logout()
-	return View("auth/login", nil)
+	http.Redirect(r.W, r.R, "/auth/login", 302)
 }

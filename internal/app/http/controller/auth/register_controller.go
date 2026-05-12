@@ -20,7 +20,7 @@ func (login *RegisterController) RegisterGet() Result {
 /*
 - Post method for register a new user
 */
-func (register *RegisterController) Register(r RequestBody[models.User]) Result {
+func (register *RegisterController) Register(r Request) Result {
 	fmt.Println("im here")
 
 	for key, values := range r.R.Form {

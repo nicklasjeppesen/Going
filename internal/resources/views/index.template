@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ .Title }}</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
-</head>
+{{ define "content" }}
 
 <body>
 
@@ -17,5 +12,4 @@
 </div>
 
 
-</body>
-</html>
+{{ end }}
