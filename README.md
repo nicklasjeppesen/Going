@@ -20,11 +20,6 @@ go install ./cmd/cli/art
 ### 2. Start the Go Application
 
 ```bash
-go run cmd/main.go
+go run main.go
 ```
 
-### run docker 
-
-```bash
-docker compose up -d
-```
