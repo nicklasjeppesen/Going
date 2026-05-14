@@ -10,8 +10,14 @@ Going framework, which is a GO's framework for increase web development speed
 
 ## Getting Started
 
-### 2. Start the Go Application
+### install the cli tool
 
+```bash
+go install ./cmd/cli/art 
+```
+
+
+### 2. Start the Go Application
 
 ```bash
 go run cmd/main.go
