@@ -1,11 +1,11 @@
-export class Event {
+class Event {
     constructor(type, payload) {
         this.type = type;
         this.payload = payload;
     }
 }
 
-export class GOSocket {
+class GOSocket {
     constructor(URL) {
         this.URL = URL;
         this.OpenCallback = null;
