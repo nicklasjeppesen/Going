@@ -14,13 +14,13 @@ type UserService struct {
 }
 
 func CreateNewUser(_user *db.User) error {
-	var user = _user.DB().Where("email", _user.Email).First()
+	var user = _user.DB(_user.GetCtx()).Where("email", _user.Email).First()
 	if user.Any() {
 		return errors.New("user already exist")
 	}
 
 	_user.Password = security.HashPassword(_user.Password)
-	_user.DB().Save()
+	_user.DB(_user.GetCtx()).Save()
 
 	return nil
 

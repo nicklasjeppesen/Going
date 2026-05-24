@@ -29,7 +29,7 @@ func (register *RegisterController) Register(r Request) Result {
 		}
 	}
 
-	user := new(models.User).DB()
+	user := new(models.User).DB(r.R.Context())
 	user.Name = r.R.FormValue("name")
 	user.Age = 30
 	user.Email = r.R.FormValue("email")

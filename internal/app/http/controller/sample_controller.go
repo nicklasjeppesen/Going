@@ -28,7 +28,7 @@ func (c *SampleController) Get(r Request) Result {
 			Message: "Message from a controller",
 		})
 
-	users := db.User{}.DB().Pagination(r.R, 3)
+	users := db.User{}.DB(r.R.Context()).Pagination(r.R, 3)
 	return Response.PrintJson(users)
 }
 
