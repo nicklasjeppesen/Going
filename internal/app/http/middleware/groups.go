@@ -10,5 +10,6 @@ func WebMiddlewareGroup() stdlibmiddleware.MiddlewareGroup {
 	return stdlibmiddleware.Chain(
 		MiddlewareCors,
 		LoggingMiddleware,
+		stdlibmiddleware.CsrfMiddleware,
 	)
 }

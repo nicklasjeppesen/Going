@@ -19,17 +19,16 @@ func (login *LoginController) LoginGet() Result {
 
 // Post
 func (login *LoginController) Login(r Request) {
-
 	auth := r.Auth()
-	if auth.Attempt(map[string]any{
-		"email":    r.R.FormValue("email"),
-		"password": r.R.FormValue("password"),
-	}) {
+	auth.Email = r.R.FormValue("email")
+	auth.Password = r.R.FormValue("password")
+
+	if auth.Attempt() {
 		http.Redirect(r.W, r.R, "/protected", 302)
 	} else {
 		Fail.StatusUnauthorized("Invalid credentials")
+		http.Redirect(r.W, r.R, "/login", 302)
 	}
-
 }
 
 func (login *LoginController) Protected(requst Request) Result {
