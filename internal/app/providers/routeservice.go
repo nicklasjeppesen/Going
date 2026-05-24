@@ -21,7 +21,6 @@ func (route *RouteServiceProvider) Map(r *http.ServeMux) {
 
 // Define the "web" route for the application.
 func mapwebRoute() *webstdlib.MyRouter {
-
 	return webrouter.Webrouter().
 		AddmiddlewareGroup(middleware.WebMiddlewareGroup()). // Example on how to add a middleware to an entire groups of routes
 		Addmiddleware(internalMiddelware.CsrfMiddleware)
