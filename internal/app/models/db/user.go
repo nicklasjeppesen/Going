@@ -1,6 +1,7 @@
 package db
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 
@@ -20,11 +21,11 @@ type User struct {
 // very very very important, do not change.
 // This is the right method to init the DB,
 // It is also used for creating new objects in a GET request, and relationship methods
-func (_user User) DB() *User {
+func (_user User) DB(ctx context.Context) *User {
 	user := &_user
 	user.Table = "users"
 	user.Columns = user.columns()
-	user.ParentDB = CreateORM(user)
+	user.ParentDB = CreateORM(ctx, user)
 	return user
 }
 
