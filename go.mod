@@ -4,7 +4,7 @@ go 1.26.3
 
 require (
 	github.com/lib/pq v1.12.3
-	github.com/nicklasjeppesen/going_internal v0.0.15
+	github.com/nicklasjeppesen/going_internal v0.0.16
 	github.com/spf13/cobra v1.10.2
 	github.com/swaggo/http-swagger v1.3.4
 )
