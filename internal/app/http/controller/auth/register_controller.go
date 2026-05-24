@@ -38,10 +38,4 @@ func (register *RegisterController) Register(r Request) Result {
 
 	return View("auth/register", Params{"Title": "Register Page"}) // have to be the URL.
 
-	/*
-		if result := r.Validate().And(UserServivce.CreateNewUser); !result.Error {
-			return View("/", nil) // have to be the URL.
-		} else {
-			return View("/TODO", Params{"errors": result.GetErrors()})
-		}*/
 }

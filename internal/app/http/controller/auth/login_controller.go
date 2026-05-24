@@ -17,8 +17,9 @@ func (login *LoginController) LoginGet() Result {
 
 }
 
-// Post
+// Post action for login
 func (login *LoginController) Login(r Request) {
+
 	auth := r.Auth()
 	auth.Email = r.R.FormValue("email")
 	auth.Password = r.R.FormValue("password")

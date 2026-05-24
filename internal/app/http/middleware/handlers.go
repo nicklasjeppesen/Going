@@ -24,7 +24,6 @@ func LoggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			ResponseWriter: w,
 			statusCode:     http.StatusOK,
 		}
-
 		next.ServeHTTP(wrapped, r)
 		log.Printf("Request: %s %s %s %s", strconv.Itoa(wrapped.statusCode), r.Method, r.URL.Path, time.Since(start).String())
 
