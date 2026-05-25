@@ -3,7 +3,7 @@ package main
 import (
 	"myapp/docs"
 	"myapp/internal/app/jobs"
-	provider "myapp/internal/app/providers"
+	provider "myapp/internal/app/providers/route"
 
 	_ "github.com/lib/pq" // PostgreSQL driver
 	app "github.com/nicklasjeppesen/going_internal/super/app"

@@ -1,4 +1,4 @@
-package provider
+package route
 
 import (
 	middleware "myapp/internal/app/http/middleware"

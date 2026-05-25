@@ -1,17 +1,31 @@
 {{ define "content" }}
 <div class="card">
-    <h1>Log ind</h1>
+    <h1>{{ .Title }}</h1>
+
+    {{ with .errors }}
+        {{ with index . "error" }}
+            <p class="error">Fejl: {{ . }}</p>
+        {{ end }}
+    {{ end }}
+
+    {{ if .Error }}
+        <p>Fejl!</p>
+    {{ end }}
+
+    <h2>{{ .Message }}</h2>
+
     <form enctype="multipart/form-data" action="/login" method="POST">
-        <label>Brugernavn</label>
-        <input type="text" name="email" required>
+        <label for="id_email">Brugernavn</label>
+        <input type="text" id="id_email" name="email" value="{{old "email"}}" required>
         
-        <label>Adgangskode</label>
-        <input type="password" name="password" required>
+        <label for="id_password">Adgangskode</label>
+        <input type="password" id="id_password" name="password" required>
         
-          <input type="hidden"  name="csrf_token" value="{{.csrf_token}}" > 
+        <input type="hidden" name="csrf_token" value="{{ .csrf_token }}">
 
         <button type="submit">Log ind</button>
     </form>
+
     <div class="nav-links">
         <a href="/register">Ny her? Opret en konto</a>
     </div>

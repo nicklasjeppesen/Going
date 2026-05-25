@@ -3,8 +3,8 @@
 <body>
 
 <div class="card">
-    <h1>Velkommen 👋</h1>
-    <p>Dette er en simpel Go-applikation med autentificering.</p>
+    <h1>{{ .Title}} 👋</h1>
+    <p>{{ .Message}}</p>
     <div class="nav-links">
         <a href="/login">Log ind</a> | 
         <a href="/register">Opret konto</a>

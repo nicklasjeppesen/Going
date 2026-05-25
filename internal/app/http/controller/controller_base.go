@@ -8,13 +8,15 @@ import (
 	"github.com/nicklasjeppesen/going_internal/super/response"
 	"github.com/nicklasjeppesen/going_internal/super/view/template"
 
+	viewProvider "myapp/internal/app/providers/view"
+
 	_request "github.com/nicklasjeppesen/going_internal/super/request"
 )
 
 type Request = _request.Requestbase
 type RequestBody[T any] = _request.RequestBodybase[T]
 
-var View = template.View
+var View = template.TemplateView{CustomViewFunctions: viewProvider.GetCustomViewFunction}.View
 var Response = response.Response{}
 var Fail = response.Fail{}
 
