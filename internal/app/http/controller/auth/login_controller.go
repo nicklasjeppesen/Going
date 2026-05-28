@@ -13,7 +13,7 @@ type LoginController struct {
 func (login *LoginController) LoginGet() Result {
 	fmt.Println("Login Called")
 	return View(
-		"auth/login",
+		"auth.login",
 		Params{"Title": "Login", "Message": "Please Login!"})
 
 }
@@ -26,7 +26,7 @@ func (login *LoginController) Login(r Request) Result {
 	auth.Password = r.R.FormValue("password")
 
 	if auth.Attempt() {
-		return Response.Redirect("/protected")
+		return Response.Redirect("protected")
 
 	} else {
 		return Response.Back(Params{"error": "Invalid credentials"})
@@ -39,5 +39,5 @@ func (login *LoginController) Protected(requst Request) Result {
 
 func (loginController *LoginController) Logout(r Request) {
 	r.Auth().Logout()
-	Response.Redirect("/auth/login")
+	Response.Redirect("auth.login")
 }

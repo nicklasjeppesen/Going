@@ -14,7 +14,7 @@ type RegisterController struct {
 }
 
 func (login *RegisterController) RegisterGet() Result {
-	return View("auth/register", Params{"Title": "Register Page"})
+	return View("auth.register", Params{"Title": "Register Page"})
 }
 
 /*
@@ -36,6 +36,6 @@ func (register *RegisterController) Register(r Request) Result {
 	user.Password = security.HashPassword(r.R.FormValue("password"))
 	user.Save()
 
-	return View("auth/register", Params{"Title": "Register Page"}) // have to be the URL.
+	return View("auth.register", Params{"Title": "Register Page"}) // have to be the URL.
 
 }

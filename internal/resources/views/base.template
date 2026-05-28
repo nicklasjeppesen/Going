@@ -10,9 +10,9 @@
 <body>
     
     <main>
-        {{ block "content" . }}
+        {{ render .ContentView . }}
         <!-- Her bliver de andre siders indhold indsat -->
-        {{ end }}
+        
     </main>
 
     <footer></footer>

@@ -1,4 +1,4 @@
-{{ define "content" }}
+{{ define "protected" }}
 
 <div class="card">
     <div class="success-msg">✓ Du er logget ind!</div>

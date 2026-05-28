@@ -1,4 +1,4 @@
-{{ define "content" }}
+{{ define "auth.register" }}
 
 <div class="card">
     <h1>Opret bruger</h1>
