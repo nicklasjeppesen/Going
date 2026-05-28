@@ -16,7 +16,7 @@ import (
 type Request = _request.Requestbase
 type RequestBody[T any] = _request.RequestBodybase[T]
 
-var View = template.TemplateView{CustomViewFunctions: viewProvider.GetCustomViewFunction}.View
+var View = template.TemplateView{BaseView: "base", CustomViewFunctions: viewProvider.GetCustomViewFunction}.View
 var Response = response.Response{}
 var Fail = response.Fail{}
 
