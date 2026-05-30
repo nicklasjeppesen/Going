@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"fmt"
 	. "myapp/internal/app/http/controller"
 
 	models "myapp/internal/app/models/db"
@@ -21,14 +20,6 @@ func (login *RegisterController) RegisterGet() Result {
 - Post method for register a new user
 */
 func (register *RegisterController) Register(r Request) Result {
-	fmt.Println("im here")
-
-	for key, values := range r.R.Form {
-		for _, value := range values {
-			fmt.Printf("%s = %s\n", key, value)
-		}
-	}
-
 	user := new(models.User).DB(r.R.Context())
 	user.Name = r.R.FormValue("name")
 	user.Age = 30

@@ -39,5 +39,5 @@ func (login *LoginController) Protected(requst Request) Result {
 
 func (loginController *LoginController) Logout(r Request) {
 	r.Auth().Logout()
-	Response.Redirect("auth.login")
+	Response.Redirect("auth/login")
 }
