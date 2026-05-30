@@ -3,6 +3,7 @@
 <html lang="da">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf_token" content="{{ .csrf_token }}">
     <title>{{ .Title }}</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="/assets/js/socket.js"></script> 
@@ -12,10 +13,13 @@
     <main>
         {{ render .ContentView . }}
         <!-- Her bliver de andre siders indhold indsat -->
-        
+
+    <footer>
+     {{ render (print .ContentView "_footer") . }}
+    </footer>    
     </main>
 
-    <footer></footer>
+    
 </body>
 </html>
 {{ end }}

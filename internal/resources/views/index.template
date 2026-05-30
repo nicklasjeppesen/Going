@@ -1,15 +1,18 @@
 {{ define "index" }}
 
 <body>
-
-<div class="card">
-    <h1>{{ .Title}} 👋</h1>
-    <p>{{ .Message}}</p>
-    <div class="nav-links">
-        <a href="/login">Log ind</a> | 
-        <a href="/register">Opret konto</a>
+    <div class="card">
+        <h1>{{ .Title}} 👋</h1>
+        <p>{{ .Message}}</p>
+        <div class="nav-links">
+            <a href="/login">Log ind</a> | 
+            <a href="/register">Opret konto</a>
+        </div>
     </div>
-</div>
+</body>
 
+{{ end }}
 
+{{ define "index_footer" }}
+    <h5>Index footer {{ .Title }}</h5>
 {{ end }}

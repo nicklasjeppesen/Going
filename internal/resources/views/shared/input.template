@@ -1,0 +1,6 @@
+
+{{ define "shared.input" }}
+
+<label for="id_{{.Name}}">{{.Title}}</label>
+        <input type="{{or .Type "text"}}" id="id_{{.Name}}" name="{{.Name}}" value="{{.oldValue}}" required>
+{{end}}
