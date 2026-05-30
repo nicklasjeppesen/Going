@@ -8,7 +8,7 @@ import (
 	internalMiddelware "github.com/nicklasjeppesen/going_internal/super/middleware"
 	"github.com/nicklasjeppesen/going_internal/super/socket"
 
-	webstdlib "github.com/nicklasjeppesen/going_internal/super/customweb"
+	webstdlib "github.com/nicklasjeppesen/going_internal/super/customrouter"
 )
 
 type RouteServiceProvider struct {

@@ -6,7 +6,7 @@ import (
 	. "myapp/internal/app/http/controller"
 	. "myapp/internal/app/http/controller/auth"
 
-	web "github.com/nicklasjeppesen/going_internal/super/customweb"
+	web "github.com/nicklasjeppesen/going_internal/super/customrouter"
 	"github.com/nicklasjeppesen/going_internal/super/middleware"
 )
 

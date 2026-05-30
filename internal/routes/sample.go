@@ -3,7 +3,7 @@ package routes
 import (
 	//	. "myapp/internal/app/http/controller"
 
-	web "github.com/nicklasjeppesen/going_internal/super/customweb"
+	web "github.com/nicklasjeppesen/going_internal/super/customrouter"
 )
 
 /*

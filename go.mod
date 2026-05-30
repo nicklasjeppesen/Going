@@ -4,12 +4,10 @@ go 1.26.3
 
 require (
 	github.com/lib/pq v1.12.3
-	github.com/nicklasjeppesen/going_internal v0.0.16
+	github.com/nicklasjeppesen/going_internal v0.0.17
 	github.com/spf13/cobra v1.10.2
 	github.com/swaggo/http-swagger v1.3.4
 )
-
-//replace github.com/nicklasjeppesen/going_internal v0.0.13 => ../going_internal
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
@@ -48,5 +46,4 @@ require (
 	golang.org/x/sys v0.44.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
 	golang.org/x/tools v0.44.0 // indirect
-	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 )
