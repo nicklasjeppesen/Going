@@ -37,7 +37,7 @@ func (login *LoginController) Protected(requst Request) Result {
 	return View("protected") // have to be the URL.
 }
 
-func (loginController *LoginController) Logout(r Request) {
+func (loginController *LoginController) Logout(r Request) Result {
 	r.Auth().Logout()
-	Response.Redirect("auth/login")
+	return Response.Redirect("/login")
 }
