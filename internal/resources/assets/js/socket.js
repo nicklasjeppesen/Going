@@ -143,7 +143,8 @@ class GOSocket {
   
     invoke(command, ...inputs) {
         if (this.isConnected()) {
-            const event = new Event(command, inputs);
+            const stringInputs = inputs.map(input => String(input));
+            const event = new Event(command, stringInputs);
             this.conn.send(JSON.stringify(event));
         } else if (this.enableQueueing) {
             console.warn(`Connection not open, queueing "${command}"`);
