@@ -3,6 +3,7 @@ package auth
 import (
 	"fmt"
 	. "myapp/internal/app/http/controller"
+	"myapp/internal/app/models/db"
 )
 
 type LoginController struct {
@@ -34,7 +35,10 @@ func (login *LoginController) Login(r Request) Result {
 }
 
 func (login *LoginController) Protected(requst Request) Result {
-	return View("protected") // have to be the URL.
+
+	userId := requst.Auth().GetUserId()
+	user := new(db.User).DB(requst.R.Context()).Where("id", userId).First()
+	return View("protected", Params{"Title": "Going App", "Username": user.Name})
 }
 
 func (loginController *LoginController) Logout(r Request) Result {

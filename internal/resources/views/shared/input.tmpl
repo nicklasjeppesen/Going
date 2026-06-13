@@ -1,6 +1,10 @@
 
 {{ define "shared.input" }}
 
-<label for="id_{{.Name}}">{{.Title}}</label>
-        <input type="{{or .Type "text"}}" id="id_{{.Name}}" name="{{.Name}}" value="{{.oldValue}}" required>
+        <label for="id_{{.Name}}">{{.Title}}</label>
+                <input type="{{or (index . "Type") "text"}}" 
+                        id="id_{{.Name}}" 
+                        name="{{.Name}}" 
+                        value="{{ if index . "oldValue" }} {{.}} {{ end }}" 
+                        required>
 {{end}}
