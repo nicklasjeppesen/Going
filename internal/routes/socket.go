@@ -17,6 +17,6 @@ import (
 func Socketrouter(socketRouter socket.Router) socket.Router {
 
 	// Example: Register a websocket route for a chat hub with JWT middleware
-	socketRouter.MapHub("/ws/example", &hubs.ChatHub{}, middleware.JWTMiddleware)
+	socketRouter.MapHub("/ws/example", &hubs.SampleHub{}, middleware.JWTMiddleware)
 	return socketRouter
 }

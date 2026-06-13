@@ -22,7 +22,6 @@ func (login *RegisterController) RegisterGet() Result {
 func (register *RegisterController) Register(r Request) Result {
 	user := new(models.User).DB(r.R.Context())
 	user.Name = r.R.FormValue("name")
-	user.Age = 30
 	user.Email = r.R.FormValue("email")
 	user.Password = security.HashPassword(r.R.FormValue("password"))
 	user.Save()
