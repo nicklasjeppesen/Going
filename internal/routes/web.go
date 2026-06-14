@@ -7,6 +7,7 @@ import (
 	. "myapp/internal/app/http/controller/auth"
 
 	web "github.com/nicklasjeppesen/going_internal/super/customrouter"
+	"github.com/nicklasjeppesen/going_internal/super/middleware"
 )
 
 /*
@@ -36,7 +37,7 @@ func Webrouter() *web.MyRouter {
 	webrouter.GET("/login", loginController.LoginGet).Name("auth.login")
 	webrouter.POST("/logout", loginController.Logout)
 
-	webrouter.GET("/protected", loginController.Protected)
+	webrouter.GET("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
 
 	return webrouter
 }
