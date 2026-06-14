@@ -27,10 +27,12 @@ func (login *LoginController) Login(r Request) Result {
 	auth.Password = r.R.FormValue("password")
 
 	if auth.Attempt() {
-		return Response.Redirect("protected")
+		return Response.With(map[string]string{"success": "Successfully signed in"}).Redirect("protected")
 
 	} else {
-		return Response.Back(Params{"error": "Invalid credentials"})
+		return Response.
+			WithErrors(map[string]string{"error": "Invalid credentials"}).
+			Back()
 	}
 }
 

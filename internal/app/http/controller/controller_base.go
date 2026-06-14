@@ -17,7 +17,7 @@ type Request = _request.Requestbase
 type RequestBody[T any] = _request.RequestBodybase[T]
 
 var View = template.TemplateView{BaseView: "base", CustomViewFunctions: viewProvider.GetCustomViewFunction}.View
-var Response = response.Response{}
+var Response = response.NewResponse()
 var Fail = response.Fail{}
 
 type Params = map[string]any

@@ -5,6 +5,6 @@
                 <input type="{{or (index . "Type") "text"}}" 
                         id="id_{{.Name}}" 
                         name="{{.Name}}" 
-                        value="{{ if index . "oldValue" }} {{.}} {{ end }}" 
+                        value="{{ if index . "oldValue" }} {{.oldValue}} {{ end }}" 
                         required>
 {{end}}

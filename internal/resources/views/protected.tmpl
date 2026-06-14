@@ -1,5 +1,12 @@
 {{ define "protected" }}
 
+{{ if .hasflash }}
+   {{ range $key, $value := .flash }}
+        <h1>{{ $value}} </h1>
+    {{end }}
+{{end}}
+
+
 <div class="card">
     <div class="success-msg">✓ Du er logget ind!</div>
     <h1>Hej, {{ .Username }}!</h1>
