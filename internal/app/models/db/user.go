@@ -9,10 +9,10 @@ import (
 
 type User struct {
 	ActiveRecord[*User] `json:"-" swaggerignore:"true" validate:"-"`
-	Name                string `json:"name" validate:"required"`
-	Age                 int64  `json:"age" validate:"min=0,max=99"`
-	Email               string `json:"email" validate:"required"`
-	Password            string `json:"password" validate:"required" hidden:"true"`
+	Name                string `form:"name" json:"name" validate:"required"`
+	Age                 int64  `form:"age" json:"age" validate:"min=0,max=99"`
+	Email               string `form:"emil" json:"email" validate:"required"`
+	Password            string `form:"password" json:"password" validate:"required" hidden:"true"`
 	SessionToken        string `json:"-" hidden:"true"`
 }
 
