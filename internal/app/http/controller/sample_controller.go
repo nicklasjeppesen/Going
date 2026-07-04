@@ -3,7 +3,6 @@ package controller
 
 import (
 	"myapp/internal/app/models/db"
-	UserService "myapp/internal/app/service/user"
 	"strconv"
 
 	"github.com/nicklasjeppesen/going_internal/super/channels"
@@ -58,8 +57,9 @@ func (c *SampleController) APITWO(id string, name string) Result {
 // @Success 200 {array} models.User
 // @Router /users [get]
 func (c *SampleController) Store(r RequestBody[db.User]) Result {
-	if result := r.Validate().And(UserService.CreateNewUser); result.Error {
-		return Fail.StatusBadRequest(result.GetErrors())
+	if result := r.Validate(); result.HasError {
+		return Response.WithErrors(result.Errors).Back()
+
 	} else {
 		return Response.Print("id er følgende: " + strconv.Itoa(int(result.Data.Id)))
 	}
