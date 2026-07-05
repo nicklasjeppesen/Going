@@ -1,11 +1,8 @@
 package controller
 
 import (
-	"fmt"
 	helper "myapp/internal/app/helper"
 	"net/http"
-
-	customrouter "github.com/nicklasjeppesen/going_internal/super/customrouter"
 )
 
 type HomeController struct {
@@ -21,25 +18,16 @@ type HomeController struct {
 func (c *HomeController) Loader(logger helper.ILogger) *HomeController {
 	c.logger = logger
 
-	c.AddBeforeAction(customrouter.BeforeAction{
-		Name:    "set_user",
-		Only:    []string{"Home", "Show", "Edit", "Update", "Delete"},
-		Handler: c.setUser,
-	})
-	c.AddBeforeAction(customrouter.BeforeAction{
-		Name:    "authenticate_user",
-		Handler: c.authenticateUser,
-	})
-	c.AddBeforeAction(customrouter.BeforeAction{
-		Name:    "authorize_admin",
-		Except:  []string{"Index", "Show"},
-		Handler: c.authorizeAdmin,
-	})
+	c.AddBeforeAction("set_user", c.setUser).
+		Only("Home", "Show", "Edit", "Update", "Delete")
 
-	c.AddAfterAction(customrouter.AfterAction{
-		Name:    "log_request",
-		Handler: c.logRequest,
-	})
+	c.AddBeforeAction("Authenticate_user", c.authenticateUser).
+		Except("Index", "Show")
+
+	c.AddBeforeAction("Authorize_admin", c.authorizeAdmin).
+		Except("Index", "Show")
+
+	c.AddAfterAction("Log_request", c.logRequest)
 
 	return c
 }
@@ -73,8 +61,6 @@ func (c *HomeController) logRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *HomeController) Home() Result {
-
-	fmt.Println("userId er: ", c.userID)
 	c.logger.Log("HomeController: Home() called")
 	return View("index", Params{"Title": "Going App", "Message": "Welcome to Going"})
 
