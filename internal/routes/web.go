@@ -5,8 +5,7 @@ import (
 
 	. "myapp/internal/app/http/controller"
 	. "myapp/internal/app/http/controller/auth"
-
-	container "myapp/internal/app/providers/container"
+	"myapp/internal/app/providers/container"
 
 	web "github.com/nicklasjeppesen/going_internal/super/customrouter"
 	"github.com/nicklasjeppesen/going_internal/super/middleware"
@@ -27,12 +26,12 @@ func Webrouter() *web.MyRouter {
 
 	webrouter := web.NewMyRouter().UseContainer(container.GetContainer())
 
-	var homeController = HomeController{}
+	var homeController = new(HomeController)
 	var registerController = RegisterController{}
 	var loginController = LoginController{}
 
 	//webrouter.GET("/", homeController.Home).Name("home.front")
-	webrouter.Get("/", &homeController, "Home").Name("home.front")
+	webrouter.Get("/", homeController, "Home").Name("home.front")
 
 	webrouter.GET("/register", registerController.RegisterGet).Name("auth.register")
 	webrouter.POST("/registerPost", registerController.Register).Name("auth.register.post")

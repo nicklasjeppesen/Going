@@ -1,8 +1,7 @@
 package container
 
 import (
-	"fmt"
-
+	"log"
 	helper "myapp/internal/app/helper"
 
 	customrouter "github.com/nicklasjeppesen/going_internal/super/customrouter"
@@ -12,13 +11,17 @@ type Logger struct {
 }
 
 func (l *Logger) Log(message string) {
-	fmt.Println(message)
+	log.Println(message)
 }
 
 func GetContainer() *customrouter.Container {
 
 	container := customrouter.NewContainer()
-	container.Register((*helper.ILogger)(nil), Logger{})
+
+	container.Register(func() helper.ILogger {
+		return new(Logger)
+	})
+
 	return container
 
 }
