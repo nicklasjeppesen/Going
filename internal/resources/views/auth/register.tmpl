@@ -12,7 +12,7 @@
         <label>Adgangskode</label>
         <input type="password" name="password" required>
         
-        <input type="hidden"  name="csrf_token" value={{.csrf_token}}>
+        {{csrf_token .}}
 
         <button type="submit">Registrer</button>
     </form>

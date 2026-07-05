@@ -5,7 +5,6 @@ import (
 
 	. "myapp/internal/app/http/controller"
 	. "myapp/internal/app/http/controller/auth"
-	"myapp/internal/app/providers/container"
 
 	web "github.com/nicklasjeppesen/going_internal/super/customrouter"
 	"github.com/nicklasjeppesen/going_internal/super/middleware"
@@ -22,15 +21,12 @@ import (
 | (Text is stolen from laravel frameworks, because laravel is also a great framework)
 |
 */
-func Webrouter() *web.MyRouter {
-
-	webrouter := web.NewMyRouter().UseContainer(container.GetContainer())
+func Webrouter(webrouter *web.MyRouter) *web.MyRouter {
 
 	var homeController = new(HomeController)
 	var registerController = RegisterController{}
 	var loginController = LoginController{}
 
-	//webrouter.GET("/", homeController.Home).Name("home.front")
 	webrouter.Get("/", homeController, "Home").Name("home.front")
 
 	webrouter.Get("/register", registerController.RegisterGet).Name("auth.register")
