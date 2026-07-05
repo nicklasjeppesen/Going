@@ -2,6 +2,7 @@ package route
 
 import (
 	middleware "myapp/internal/app/http/middleware"
+	"myapp/internal/app/providers/container"
 	webrouter "myapp/internal/routes"
 	"net/http"
 
@@ -35,8 +36,12 @@ func mapSampleRoute() *webstdlib.MyRouter {
 
 func RegisterMaps(r *http.ServeMux) {
 	var route = RouteServiceProvider{}
+
 	route.Map(r)
+
+	// register socket Router
 	socketRouter := socket.NewSocketRouter()
+	socketRouter.UseContainer(container.GetContainer())
 	var socket = webrouter.Socketrouter(socketRouter)
 	socket.RegisterRoutes(r)
 }

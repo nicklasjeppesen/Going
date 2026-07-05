@@ -33,14 +33,14 @@ func Webrouter() *web.MyRouter {
 	//webrouter.GET("/", homeController.Home).Name("home.front")
 	webrouter.Get("/", homeController, "Home").Name("home.front")
 
-	webrouter.GET("/register", registerController.RegisterGet).Name("auth.register")
-	webrouter.POST("/registerPost", registerController.Register).Name("auth.register.post")
+	webrouter.Get("/register", registerController.RegisterGet).Name("auth.register")
+	webrouter.Post("/registerPost", registerController.Register).Name("auth.register.post")
 
-	webrouter.POST("/login", loginController.Login)
-	webrouter.GET("/login", loginController.LoginGet).Name("auth.login")
-	webrouter.POST("/logout", loginController.Logout)
+	webrouter.Post("/login", loginController.Login)
+	webrouter.Get("/login", loginController.LoginGet).Name("auth.login")
+	webrouter.Post("/logout", loginController.Logout)
 
-	webrouter.GET("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
+	webrouter.Get("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
 
 	return webrouter
 }
