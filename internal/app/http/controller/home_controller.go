@@ -18,16 +18,16 @@ type HomeController struct {
 func (c *HomeController) Loader(logger helper.ILogger) *HomeController {
 	c.logger = logger
 
-	c.AddBeforeAction("set_user", c.setUser).
+	c.AddBeforeAction(c.setUser).
 		Only("Home", "Show", "Edit", "Update", "Delete")
 
-	c.AddBeforeAction("Authenticate_user", c.authenticateUser).
+	c.AddBeforeAction(c.authenticateUser).
 		Except("Index", "Show")
 
-	c.AddBeforeAction("Authorize_admin", c.authorizeAdmin).
+	c.AddBeforeAction(c.authorizeAdmin).
 		Except("Index", "Show")
 
-	c.AddAfterAction("Log_request", c.logRequest)
+	c.AddAfterAction(c.logRequest)
 
 	return c
 }
