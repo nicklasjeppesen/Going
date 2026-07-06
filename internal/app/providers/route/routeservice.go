@@ -12,17 +12,25 @@ import (
 	webstdlib "github.com/nicklasjeppesen/going_internal/super/customrouter"
 )
 
-type RouteServiceProvider struct {
+func RegisterMaps(r *http.ServeMux) {
+	registerHttpRoutes(r)
+	registerSocketRoutes(r)
 }
 
-func (route *RouteServiceProvider) Map(r *http.ServeMux) {
+func registerSocketRoutes(r *http.ServeMux) {
+	socketRouter := socket.NewSocketRouter()
+	socketRouter.UseContainer(container.GetContainer())
+	var socket = webrouter.Socketrouter(socketRouter)
+	socket.RegisterRoutes(r)
+}
+
+func registerHttpRoutes(r *http.ServeMux) {
 	mapwebRoute().RegisterRoutes(r)    // register the general Web provider
 	mapSampleRoute().RegisterRoutes(r) // register new workspace
 }
 
 // Define the "web" route for the application.
 func mapwebRoute() *webstdlib.MyRouter {
-
 	_webrouter := webstdlib.NewMyRouter().UseContainer(container.GetContainer())
 
 	return webrouter.Webrouter(_webrouter).
@@ -31,21 +39,8 @@ func mapwebRoute() *webstdlib.MyRouter {
 }
 
 func mapSampleRoute() *webstdlib.MyRouter {
-
 	return webrouter.Samplerouter().
 		AddmiddlewareGroup(middleware.WebMiddlewareGroup()).
 		Addmiddleware(internalMiddelware.JWTMiddleware).
 		Addprefix("/sample")
-}
-
-func RegisterMaps(r *http.ServeMux) {
-	var route = RouteServiceProvider{}
-
-	route.Map(r)
-
-	// register socket Router
-	socketRouter := socket.NewSocketRouter()
-	socketRouter.UseContainer(container.GetContainer())
-	var socket = webrouter.Socketrouter(socketRouter)
-	socket.RegisterRoutes(r)
 }

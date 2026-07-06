@@ -2,7 +2,6 @@ package controller
 
 import (
 	helper "myapp/internal/app/helper"
-	"net/http"
 )
 
 type HomeController struct {
@@ -15,7 +14,7 @@ type HomeController struct {
 // Loader defines the controller's dependencies as interfaces. The router
 // resolves these from the Container and calls Loader once, at route
 // registration time, to build the "real" controller instance.
-func (c *HomeController) Loader(logger helper.ILogger) *HomeController {
+func (c *HomeController) New(logger helper.ILogger) *HomeController {
 	c.logger = logger
 
 	c.AddBeforeAction(c.setUser).
@@ -32,13 +31,14 @@ func (c *HomeController) Loader(logger helper.ILogger) *HomeController {
 	return c
 }
 
-func (c *HomeController) setUser(w http.ResponseWriter, r *http.Request) bool {
+func (c *HomeController) setUser(request Request) bool {
+
 	c.userID = "12355"
 	c.logger.Log("set_user: " + c.userID)
 	return true
 }
 
-func (c *HomeController) authenticateUser(w http.ResponseWriter, r *http.Request) bool {
+func (c *HomeController) authenticateUser(request Request) bool {
 	c.logger.Log("authenticate_user")
 	// if not logged in {
 	// 	w.WriteHeader(http.StatusUnauthorized)
@@ -47,7 +47,7 @@ func (c *HomeController) authenticateUser(w http.ResponseWriter, r *http.Request
 	return true
 }
 
-func (c *HomeController) authorizeAdmin(w http.ResponseWriter, r *http.Request) bool {
+func (c *HomeController) authorizeAdmin(request Request) bool {
 	c.logger.Log("authorize_admin")
 	// if !isAdmin(r) {
 	// 	w.WriteHeader(http.StatusForbidden)
@@ -56,8 +56,8 @@ func (c *HomeController) authorizeAdmin(w http.ResponseWriter, r *http.Request) 
 	return true
 }
 
-func (c *HomeController) logRequest(w http.ResponseWriter, r *http.Request) {
-	c.logger.Log("done: " + r.URL.Path)
+func (c *HomeController) logRequest(request Request) {
+	c.logger.Log("done: " + request.R.URL.Path)
 }
 
 func (c *HomeController) Home() Result {

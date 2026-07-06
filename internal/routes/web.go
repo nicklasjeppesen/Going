@@ -38,5 +38,15 @@ func Webrouter(webrouter *web.MyRouter) *web.MyRouter {
 
 	webrouter.Get("/protected", loginController.Protected).AddMiddleware(middleware.JWTMiddleware)
 
+	// Admin
+	adminRouter := webrouter.Group("/admin")
+
+	adminRouterUsers := adminRouter.Group("/users")
+	adminRoutercompany := adminRouter.Group("/company")
+
+	adminRouter.Get("/index", new(AdminController), "Home")
+	adminRouterUsers.Get("/index", new(AdminController), "Users")
+	adminRoutercompany.Get("/index", new(AdminController), "Company")
+
 	return webrouter
 }

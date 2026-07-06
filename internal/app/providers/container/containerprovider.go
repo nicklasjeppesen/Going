@@ -18,9 +18,7 @@ func GetContainer() *customrouter.Container {
 
 	container := customrouter.NewContainer()
 
-	container.Register(func() helper.ILogger {
-		return new(Logger)
-	})
+	container.Register(func() helper.ILogger { return new(Logger) })
 
 	return container
 
