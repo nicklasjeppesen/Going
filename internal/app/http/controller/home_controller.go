@@ -14,7 +14,7 @@ type HomeController struct {
 // Loader defines the controller's dependencies as interfaces. The router
 // resolves these from the Container and calls Loader once, at route
 // registration time, to build the "real" controller instance.
-func (c *HomeController) New(logger helper.ILogger) *HomeController {
+func (c *HomeController) Loader(logger helper.ILogger) *HomeController {
 	c.logger = logger
 
 	c.AddBeforeAction(c.setUser).
