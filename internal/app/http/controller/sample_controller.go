@@ -2,6 +2,7 @@
 package controller
 
 import (
+	"fmt"
 	"myapp/internal/app/models/db"
 	"strconv"
 
@@ -63,4 +64,22 @@ func (c *SampleController) Store(r RequestBody[db.User]) Result {
 	} else {
 		return Response.Print("id er følgende: " + strconv.Itoa(int(result.Data.Id)))
 	}
+}
+
+type InputTest struct {
+	Name string `form:"name" json:"name" validate:"required"`
+	Age  int64  `form:"age" json:"age" validate:"min=0,max=99,required"`
+}
+
+func (c *SampleController) Tester(r RequestBody[InputTest]) Result {
+
+	fmt.Println("Kører Test")
+
+	if result := r.Validate(); result.HasError {
+		fmt.Println(result.Errors)
+		return Response.PrintJson(result.Errors)
+	} else {
+		return Response.Print("Alt er fint")
+	}
+
 }
