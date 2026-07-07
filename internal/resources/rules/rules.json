@@ -10,7 +10,7 @@
         "alpha":    "Værdien må kun indeholde bogstaver",
         "url":      "Ugyldig URL",
         "uuid":     "Ugyldig UUID",
-        "password_strenght" : "password skal indeholde storebogstaver, småbogstaver og tal"
+        "password_strength" : "password skal indeholde storebogstaver, småbogstaver og tal"
     },
     "field_messages": {
         "CreateUserRequest": {
