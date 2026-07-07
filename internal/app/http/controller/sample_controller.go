@@ -66,18 +66,15 @@ func (c *SampleController) Store(r RequestBody[db.User]) Result {
 	}
 }
 
-type InputTest struct {
-	Name string `form:"name" json:"name" validate:"required"`
-	Age  int64  `form:"age" json:"age" validate:"min=0,max=99,required"`
+type CreateUserRequest struct {
+	Username string `form:"name" json:"username" validate:"required"`
+	Email    string `form:"email" json:"email" validate:"required,email"`
 }
 
-func (c *SampleController) Tester(r RequestBody[InputTest]) Result {
-
-	fmt.Println("Kører Test")
-
+func (c *SampleController) Tester(r RequestBody[CreateUserRequest]) Result {
 	if result := r.Validate(); result.HasError {
 		fmt.Println(result.Errors)
-		return Response.PrintJson(result.Errors)
+		return Response.PrintJson(result.Errors, 400)
 	} else {
 		return Response.Print("Alt er fint")
 	}

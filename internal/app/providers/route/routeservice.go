@@ -34,8 +34,7 @@ func mapwebRoute() *webstdlib.MyRouter {
 	_webrouter := webstdlib.NewMyRouter().UseContainer(container.GetContainer())
 
 	return webrouter.Webrouter(_webrouter).
-		AddmiddlewareGroup(middleware.WebMiddlewareGroup()) //. // Example on how to add a middleware to an entire groups of routes
-	//Addmiddleware(internalMiddelware.CsrfMiddleware)
+		AddmiddlewareGroup(middleware.WebMiddlewareGroup())
 }
 
 func mapSampleRoute() *webstdlib.MyRouter {

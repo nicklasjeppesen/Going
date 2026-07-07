@@ -26,8 +26,9 @@ func Webrouter(webrouter *web.MyRouter) *web.MyRouter {
 	var homeController = new(HomeController)
 	var registerController = RegisterController{}
 	var loginController = LoginController{}
+	var sampleController = SampleController{}
 
-	webrouter.Post("/tester", new(SampleController), "Tester")
+	webrouter.Post("/tester", sampleController.Tester)
 
 	webrouter.Get("/", homeController, "Home").Name("home.front")
 

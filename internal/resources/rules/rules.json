@@ -9,7 +9,8 @@
         "numeric":  "Værdien skal være et tal",
         "alpha":    "Værdien må kun indeholde bogstaver",
         "url":      "Ugyldig URL",
-        "uuid":     "Ugyldig UUID"
+        "uuid":     "Ugyldig UUID",
+        "password_strenght" : "password skal indeholde storebogstaver, småbogstaver og tal"
     },
     "field_messages": {
         "CreateUserRequest": {
@@ -18,6 +19,9 @@
             "Email.required":    "Email adresse er påkrævet",
             "Email.email":       "Indtast en gyldig email adresse",
             "Age.min":           "Du skal være mindst {param} år gammel"
+        }, 
+         "RegisterUserRequest": {
+            "Password.min":      "Password skal indeholde mindst {param} tegn"
         }
     }
 }
