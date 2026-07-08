@@ -3,8 +3,10 @@ package routes
 import (
 	//. "myapp/internal/app/http/controller"
 
+	"fmt"
 	. "myapp/internal/app/http/controller"
 	. "myapp/internal/app/http/controller/auth"
+	"net/http"
 
 	web "github.com/nicklasjeppesen/going_internal/super/customrouter"
 	"github.com/nicklasjeppesen/going_internal/super/middleware"
@@ -28,9 +30,15 @@ func Webrouter(webrouter *web.MyRouter) *web.MyRouter {
 	var loginController = LoginController{}
 	var sampleController = SampleController{}
 
-	webrouter.Post("/tester", sampleController.Tester)
+	// 404 - page not found
+	webrouter.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "page not found :(")
+	})
 
-	webrouter.Get("/", homeController, "Home").Name("home.front")
+	// Home page
+	webrouter.Get("/{$}", homeController, "Home").Name("home.front")
+
+	webrouter.Post("/tester", sampleController.Tester)
 
 	webrouter.Get("/register", registerController.RegisterGet).Name("auth.register")
 	webrouter.Post("/registerPost", registerController.Register).Name("auth.register.post")
