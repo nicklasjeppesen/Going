@@ -5,7 +5,6 @@ import (
 	"regexp"
 
 	"github.com/go-playground/validator/v10"
-	validation "github.com/nicklasjeppesen/going_internal/super/validation"
 )
 
 func PasswordStrength(fl validator.FieldLevel) bool {
@@ -20,16 +19,9 @@ func PasswordStrength(fl validator.FieldLevel) bool {
 }
 
 // RegisterAll custom validation rules
-func RegisterAll() error {
-	rules := map[string]func(fl validator.FieldLevel) bool{
+func RegisterCustomRule() map[string]func(fl validator.FieldLevel) bool {
+	return map[string]func(fl validator.FieldLevel) bool{
+		// register our custom rules.
 		"password_strength": PasswordStrength,
 	}
-
-	for tag, fn := range rules {
-		if err := validation.RegisterValidation(tag, fn); err != nil {
-			fmt.Errorf("failed to register validation rule %q: %w", tag, err)
-			panic(err)
-		}
-	}
-	return nil
 }
