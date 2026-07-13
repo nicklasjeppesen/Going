@@ -17,7 +17,7 @@ func main() {
 
 	// Register http and websocket routes
 	providerRoute.RegisterMaps(app.Router)
-	providerRule.RegisterAll()
+	app.RegisterCustomRules(providerRule.RegisterCustomRule())
 
 	// Register backgrounds job
 	jobs.RegisterJobs(app.Scheduler)
