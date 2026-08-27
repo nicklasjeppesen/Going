@@ -8,6 +8,7 @@ import (
 	"time"
 
 	stdlibmiddleware "github.com/nicklasjeppesen/going_internal/super/middleware"
+	"github.com/nicklasjeppesen/going_internal/super/request"
 )
 
 type wrappedWriter struct {
@@ -16,36 +17,38 @@ type wrappedWriter struct {
 }
 
 // LoggingMiddleware logs the details of each request
-func LoggingMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func LoggingMiddleware(next request.Handler) request.Handler {
+	return func(req *request.Requestbase) {
 		start := time.Now()
-
 		wrapped := &wrappedWriter{
-			ResponseWriter: w,
+			ResponseWriter: req.W,
 			statusCode:     http.StatusOK,
 		}
-		next.ServeHTTP(wrapped, r)
-		log.Printf("Request: %s %s %s %s", strconv.Itoa(wrapped.statusCode), r.Method, r.URL.Path, time.Since(start).String())
 
-	})
+		req.W = wrapped
+		next(req)
+		log.Printf("Request: %s %s %s %s", strconv.Itoa(wrapped.statusCode), req.R.Method, req.R.URL.Path, time.Since(start).String())
+
+	}
 }
 
 // AuthMiddleware checks for a valid authentication token
-func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		token := r.Header.Get("Authorization")
+func AuthMiddleware(next request.Handler) request.Handler {
+	return func(req *request.Requestbase) {
+
+		token := req.R.Header.Get("Authorization")
 		if token != "valid-token" {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			http.Error(req.W, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
-		next.ServeHTTP(w, r)
-	})
+		next(req)
+	}
 }
 
-func MiddlewareCors(next http.HandlerFunc) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
+func MiddlewareCors(next request.Handler) request.Handler {
+	return func(req *request.Requestbase) {
 		stdlibmiddleware.Cors(next, config.AllowedOrigins())
-		next.ServeHTTP(w, r)
-	})
+
+		next(req)
+	}
 }

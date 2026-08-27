@@ -3,7 +3,8 @@ package main
 import (
 	"myapp/docs"
 	"myapp/internal/app/jobs"
-	provider "myapp/internal/app/providers/route"
+	providerRoute "myapp/internal/app/providers/route"
+	providerRule "myapp/internal/app/providers/rule"
 
 	_ "github.com/lib/pq" // PostgreSQL driver
 	app "github.com/nicklasjeppesen/going_internal/super/app"
@@ -15,7 +16,8 @@ func main() {
 	var app = app.NewApp()
 
 	// Register http and websocket routes
-	provider.RegisterMaps(app.Router)
+	providerRoute.RegisterMaps(app.Router)
+	app.RegisterCustomRules(providerRule.RegisterCustomRule())
 
 	// Register backgrounds job
 	jobs.RegisterJobs(app.Scheduler)

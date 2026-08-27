@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/nicklasjeppesen/going_internal/super/channels"
+	customrouter "github.com/nicklasjeppesen/going_internal/super/customrouter"
 	"github.com/nicklasjeppesen/going_internal/super/response"
 	"github.com/nicklasjeppesen/going_internal/super/view/template"
 
@@ -25,6 +26,8 @@ type Params = map[string]any
 type Result = func(http.ResponseWriter, *http.Request)
 
 type ControllerBase struct {
+	customrouter.BaseController // gives us AddBeforeAction / AddAfterAction
+
 }
 
 var (

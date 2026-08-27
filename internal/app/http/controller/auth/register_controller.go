@@ -16,14 +16,24 @@ func (login *RegisterController) RegisterGet() Result {
 	return View("auth.register", Params{"Title": "Register Page"})
 }
 
+type RegisterUserRequest struct {
+	Name     string `form:"name" json:"username" validate:"required"`
+	Email    string `form:"email" json:"email" validate:"required,email"`
+	Password string `form:"password" json:"password" validate:"required,min=6,password_strength"`
+}
+
 /*
 - Post method for register a new user
 */
-func (register *RegisterController) Register(r Request) Result {
+func (register *RegisterController) Register(r RequestBody[RegisterUserRequest]) Result {
+	if result := r.Validate(); result.HasError {
+		return Response.WithErrors(result.Errors).Back()
+	}
+
 	user := new(models.User).DB(r.R.Context())
-	user.Name = r.R.FormValue("name")
-	user.Email = r.R.FormValue("email")
-	user.Password = security.HashPassword(r.R.FormValue("password"))
+	user.Name = r.Body.Name
+	user.Email = r.Body.Email
+	user.Password = security.HashPassword(r.Body.Password)
 	user.Save()
 
 	return View("auth.register", Params{"Title": "Register Page"}) // have to be the URL.

@@ -3,7 +3,6 @@ package routes
 import (
 	"myapp/internal/app/http/hubs"
 
-	"github.com/nicklasjeppesen/going_internal/super/middleware"
 	socket "github.com/nicklasjeppesen/going_internal/super/socket"
 )
 
@@ -17,6 +16,6 @@ import (
 func Socketrouter(socketRouter socket.Router) socket.Router {
 
 	// Example: Register a websocket route for a chat hub with JWT middleware
-	socketRouter.MapHub("/ws/example", &hubs.SampleHub{}, middleware.JWTMiddleware)
+	socketRouter.MapHub("/ws/example", &hubs.SampleHub{})
 	return socketRouter
 }

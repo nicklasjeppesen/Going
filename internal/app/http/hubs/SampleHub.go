@@ -2,12 +2,21 @@ package hubs
 
 import (
 	"fmt"
+	"myapp/internal/app/helper"
 
 	socket "github.com/nicklasjeppesen/going_internal/super/socket"
 )
 
 type SampleHub struct {
 	socket.BaseHub
+	logger helper.ILogger
+}
+
+// Loader resolves SampleHub's dependencies from the container. Since it
+// returns nothing, socket.Router keeps using this same *SampleHub instance —
+// Loader just fills in its fields.
+func (h *SampleHub) Loader(logger helper.ILogger) {
+	h.logger = logger
 }
 
 /*
@@ -20,6 +29,8 @@ func (sample *SampleHub) RegisterRoutes() {
 }
 
 func (sample *SampleHub) handleNewMessage(parameters []string, client *socket.Client) error {
+	sample.logger.Log("Received new message: " + fmt.Sprintf("%v", parameters))
+
 	client.SendMessage("new_message", "Thank you for your message")
 	return nil
 }

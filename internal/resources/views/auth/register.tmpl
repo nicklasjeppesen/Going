@@ -4,15 +4,26 @@
     <h1>Opret bruger</h1>
     <form enctype="multipart/form-data" action="/registerPost" method="POST">
         <label>Name</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" required value="{{ ( old "name" .)  }}">
         
         <label>Email</label>
-        <input type="email" name="email" required>
+        <input type="email" name="email" required value="{{ ( old "email" .)  }}">
         
         <label>Adgangskode</label>
-        <input type="password" name="password" required>
+
+
+    {{ if index .errors "password" }}
+        <div class="error-message">
+            <ul>
+            {{ range index .errors "password" }}
+                <li>{{ . }}</li>
+            {{ end }}
+            </ul>
+        </div>
+    {{ end }}
         
-        <input type="hidden"  name="csrf_token" value={{.csrf_token}}>
+        <input type="password" name="password" required>
+        {{csrf_token .}}
 
         <button type="submit">Registrer</button>
     </form>

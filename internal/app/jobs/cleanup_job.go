@@ -20,9 +20,11 @@ func CleanupJob() Job {
 func Runner(job Job) {
 	log.Println("cleanup: start")
 	for i := 0; i < 20; i++ {
-		if job.IsInterrupted() {
+		if interrupted, err := job.IsInterrupted(); interrupted {
 			HandleIfJobInterrupted(job)
 			return
+		} else if err != nil {
+			log.Printf("cleanup: error occurred: %v", err)
 		}
 		time.Sleep(1 * time.Second)
 		log.Printf("cleanup: chunk %d færdig", i+1)
