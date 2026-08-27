@@ -32,27 +32,18 @@ func (c *HomeController) Loader(logger helper.ILogger) *HomeController {
 }
 
 func (c *HomeController) setUser(request Request) bool {
-
-	c.userID = "12355"
+	c.userID = "12345"
 	c.logger.Log("set_user: " + c.userID)
 	return true
 }
 
 func (c *HomeController) authenticateUser(request Request) bool {
 	c.logger.Log("authenticate_user")
-	// if not logged in {
-	// 	w.WriteHeader(http.StatusUnauthorized)
-	// 	return false
-	// }
 	return true
 }
 
 func (c *HomeController) authorizeAdmin(request Request) bool {
 	c.logger.Log("authorize_admin")
-	// if !isAdmin(r) {
-	// 	w.WriteHeader(http.StatusForbidden)
-	// 	return false
-	// }
 	return true
 }
 
@@ -63,5 +54,4 @@ func (c *HomeController) logRequest(request Request) {
 func (c *HomeController) Home() Result {
 	c.logger.Log("HomeController: Home() called")
 	return View("index", Params{"Title": "Going App", "Message": "Welcome to Going"})
-
 }
