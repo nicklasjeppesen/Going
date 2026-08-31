@@ -5,7 +5,7 @@ go 1.27.0
 require (
 	github.com/go-playground/validator/v10 v10.30.2
 	github.com/lib/pq v1.12.3
-	github.com/nicklasjeppesen/going_internal v0.1.0
+	github.com/nicklasjeppesen/going_internal v0.1.1
 	github.com/spf13/cobra v1.10.2
 	github.com/swaggo/http-swagger v1.3.4
 )
