@@ -38,7 +38,7 @@ func (login *LoginController) Login(r Request) Result {
 
 func (login *LoginController) Protected(requst Request) Result {
 
-	userId := requst.Auth().GetUserId()
+	userId := requst.Auth().UserIdAsString()
 	user := new(db.User).DB(requst.R.Context()).Where("id", userId).First()
 	return View("protected", Params{"Title": "Going App", "Username": user.Name})
 }
